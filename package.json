@@ -3,7 +3,6 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "heroku-postbuild": "npm run build",
         "start": "next start"
     },
     "dependencies": {
