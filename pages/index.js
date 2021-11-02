@@ -24,17 +24,17 @@ export default function IndexPage(props) {
       <MainLayout>
         <div className="flex flex-col items-center">
           <div className="pt-6 mb-4">
-            <h1 className="font-bold text-4xl underline">PLAYLIST APP</h1>
-          </div>
-          <PlayLists entryItems={entryItems ? entryItems : chartEntries} />
-        </div>
-        <div className="flex flex-col"></div>
-      </MainLayout>
+            <h1 className="font-bold text-4xl underline"> PLAYLIST APP </h1>{" "}
+          </div>{" "}
+          <PlayLists entryItems={entryItems ? entryItems : chartEntries} />{" "}
+        </div>{" "}
+        <div className="flex flex-col"> </div>{" "}
+      </MainLayout>{" "}
     </div>
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // Fetch all available playlists
   let entryItems = await getChartEntries("playlist").then((entries) => {
     return entries.items;

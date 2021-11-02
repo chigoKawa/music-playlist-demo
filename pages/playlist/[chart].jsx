@@ -133,36 +133,36 @@ const TrackList = (props) => {
 
 export default TrackList;
 
-export async function getStaticPaths() {
-  // return list of possible vals
-  let entryItems = await getChartEntries("playlist").then((entries) => {
-    return entries.items;
-  });
-  let paths = [];
+// export async function getStaticPaths() {
+//   // return list of possible vals
+//   let entryItems = await getChartEntries("playlist").then((entries) => {
+//     return entries.items;
+//   });
+//   let paths = [];
 
-  if (entryItems) {
-    entryItems.map((item) => {
-      //   let title = _.get(item, "fields.title");
-      let slug = _.get(item, "fields.slug");
-      //   let id = _.get(item, "sys.id");
-      try {
-        // title = title.replace(/ /g, "-");
-      } catch (error) {
-        console.log(error);
-      }
-      paths.push({ params: { type: "TESTING!", chart: slug } });
-    });
-  }
+//   if (entryItems) {
+//     entryItems.map((item) => {
+//       //   let title = _.get(item, "fields.title");
+//       let slug = _.get(item, "fields.slug");
+//       //   let id = _.get(item, "sys.id");
+//       try {
+//         // title = title.replace(/ /g, "-");
+//       } catch (error) {
+//         console.log(error);
+//       }
+//       paths.push({ params: { type: "TESTING!", chart: slug } });
+//     });
+//   }
 
-  return {
-    paths: paths,
+//   return {
+//     paths: paths,
 
-    // paths: Array.isArray(entryItems)? entryItems?.map(({ chart }) => `/playlist/${chart}`) ?? [] : [] ,
-    fallback: false,
-  };
-}
+//     // paths: Array.isArray(entryItems)? entryItems?.map(({ chart }) => `/playlist/${chart}`) ?? [] : [] ,
+//     fallback: false,
+//   };
+// }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   // Fetch necessary data for
   let entryItems = await getChartEntries("playlist").then((entries) => {
     console.log("second enti", entries.items[0].fields.tracks);
