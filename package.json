@@ -1,26 +1,27 @@
 {
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "@headlessui/react": "^1.4.1",
-    "@heroicons/react": "^1.0.4",
-    "contentful": "^9.0.0",
-    "next": "latest",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.3.6",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.26.0",
-    "postcss": "^8.3.8",
-    "prettier": "^2.4.1",
-    "tailwindcss": "^2.2.16"
-  }
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "heroku-postbuild": "npm run build",
+        "start": "next start"
+    },
+    "dependencies": {
+        "@headlessui/react": "^1.4.1",
+        "@heroicons/react": "^1.0.4",
+        "contentful": "^9.0.0",
+        "next": "latest",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.3.6",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-react": "^7.26.0",
+        "postcss": "^8.3.8",
+        "prettier": "^2.4.1",
+        "tailwindcss": "^2.2.16"
+    }
 }
