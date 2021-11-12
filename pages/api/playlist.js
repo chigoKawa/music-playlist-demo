@@ -10,14 +10,18 @@ export default function playlistAPI(req, res) {
         const includes = _.get(entries, "entryItems.includes");
     });
 
-    let entry = tools
-        .getEntry("37cErEJJZIqhmJAl7Yf9I0")
-        .then((entry) => {
-            res.status(200).json({ entry });
-        })
-        .catch((getEntryError) => {
-            console.log("getEntryError", getEntryError);
-        });
+    const id = _.get(req, "query.id");
+    // console.log("ID", id);
+    if (id) {
+        tools
+            .getEntry(id)
+            .then((entry) => {
+                res.status(200).json({ entry });
+            })
+            .catch((getEntryError) => {
+                console.log("getEntryError", getEntryError);
+            });
+    }
 
     // res.status(200).json({ name: "John Doe" });
 }
