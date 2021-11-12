@@ -8,7 +8,16 @@ export default function playlistAPI(req, res) {
     let entryItems = tools.getChartEntries("playlist").then((entries) => {
         const entryItems = _.get(entries, "entryItems.items");
         const includes = _.get(entries, "entryItems.includes");
-        res.status(200).json({ entries: entries, includes: includes });
     });
+
+    let entry = tools
+        .getEntry("37cErEJJZIqhmJAl7Yf9I0")
+        .then((entry) => {
+            res.status(200).json({ entry });
+        })
+        .catch((getEntryError) => {
+            console.log("getEntryError", getEntryError);
+        });
+
     // res.status(200).json({ name: "John Doe" });
 }
