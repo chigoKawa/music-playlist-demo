@@ -18,14 +18,10 @@ const TrackList = (props) => {
   let title = _.get(entry, "[0].fields.title");
   let tracks = _.get(entry, "[0].fields.tracks");
   let image = _.get(entry, "[0].fields.image.fields.asset.fields.file.url");
-  //   let imageDescription = _.get(
-  //     entry,
-  //     "[0].fields.image.fields.asset.fields.description"
-  //   );
+
   if (!entryItems) {
     // return "No Entries"
   }
-  //   const trackID = _.get(tracks, "[0]sys.id");
 
   let trackMedia = "";
 
@@ -132,35 +128,6 @@ const TrackList = (props) => {
 };
 
 export default TrackList;
-
-// export async function getStaticPaths() {
-//   // return list of possible vals
-//   let entryItems = await getChartEntries("playlist").then((entries) => {
-//     return entries.items;
-//   });
-//   let paths = [];
-
-//   if (entryItems) {
-//     entryItems.map((item) => {
-//       //   let title = _.get(item, "fields.title");
-//       let slug = _.get(item, "fields.slug");
-//       //   let id = _.get(item, "sys.id");
-//       try {
-//         // title = title.replace(/ /g, "-");
-//       } catch (error) {
-//         console.log(error);
-//       }
-//       paths.push({ params: { type: "TESTING!", chart: slug } });
-//     });
-//   }
-
-//   return {
-//     paths: paths,
-
-//     // paths: Array.isArray(entryItems)? entryItems?.map(({ chart }) => `/playlist/${chart}`) ?? [] : [] ,
-//     fallback: false,
-//   };
-// }
 
 export async function getServerSideProps({ params }) {
   // Fetch necessary data for

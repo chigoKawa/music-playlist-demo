@@ -18,7 +18,17 @@ const SongComponent = (props) => {
 
   const title = _.get(track, "fields.title");
   const mediaUrl = _.get(track, "fields.mediaUrl");
-  let youtubeVideoID = youtube_parser(mediaUrl);
+  const youtubeVideoId = _.get(
+    track,
+    "fields.youtubeVideoId.fields.youtubeVideo"
+  );
+  const youtubeVideoTitle = _.get(track, "fields.youtubeVideoId.fields.title");
+  let youtubeVideoID = "";
+  if (youtubeVideoId) {
+    youtubeVideoID = youtubeVideoId;
+  } else {
+    youtubeVideoID = youtube_parser(mediaUrl);
+  }
 
   //   const releaseDate = _.get(track, "fields.releaseDate");
   //   const artist = _.get(track, "fields.artist");
@@ -29,6 +39,7 @@ const SongComponent = (props) => {
 
   return (
     <>
+      {/* youtubeVideoId : {JSON.stringify(youtubeVideoId)} : {youtubeVideoTitle} */}
       <div className="flex flex-col items-center">
         <div className="mt-4 mb-4 ">
           <h3 className="text-center text-2xl">

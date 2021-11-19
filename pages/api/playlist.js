@@ -11,7 +11,7 @@ export default function playlistAPI(req, res) {
     });
 
     const id = _.get(req, "query.id");
-    // console.log("ID", id);
+
     if (id) {
         tools
             .getEntry(id)

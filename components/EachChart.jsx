@@ -18,7 +18,6 @@ const EachChart = (props) => {
         ? tracks.map((track, index) => {
             const trackID = _.get(track, "sys.id");
             let trackMedia = "";
-            console.log("trackID", trackID);
 
             return (
               <SongComponent
