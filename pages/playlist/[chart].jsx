@@ -53,7 +53,7 @@ const TrackList = (props) => {
                 /> */}
               </div>
 
-              <div className=" absolute   left-1/2 top-1/2 flex flex-col p-2x">
+              <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col p-2x">
                 <h2 className="font-bold text-2xl">{title}</h2>
                 {tracks ? (
                   <div className="bg-blau rounded shadow-lg p-2 text-center mt-2x">
