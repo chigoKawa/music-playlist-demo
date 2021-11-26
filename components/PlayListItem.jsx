@@ -14,7 +14,7 @@ const PlayListItem = (props) => {
     return "";
   }
   return (
-    <div className="w-full h-full max-h-full">
+    <div className="w-full min-h-full h-auto max-h-full ">
       <a href={`/playlist/${slug}`}>
         {/* <img src={`https:${image}`} alt={imageDescription} /> */}
         <div
@@ -22,10 +22,12 @@ const PlayListItem = (props) => {
             backgroundImage: `url(${image})`,
             backgroundColor: `rgba(255, 255, 255, 0.486)`,
             backgroundBlendMode: "overlay",
+            height: "200px",
+            // width: "200px",
           }}
-          className="h-full w-full bg-blue-100 bg-auto hover:bg-contain bg-center flex  hover:bg-blue-50 rounded shadow-md py-6 items-center text-center"
+          className="transition duration-500 ease-in-out h-full max-h-80 w-full bg-blue-100 bg-auto hover:bg-contain bg-center flex  hover:bg-blue-50 rounded shadow-md py-6 items-center text-center transform hover:-translate-y-1 hover:scale-110"
         >
-          <span className="p-2 bg-white border-t-2 border-b-2 border-black mx-auto h-fullx w-full">
+          <span className="p-2 bg-whitex border-t-4 text-blau border-b-4 border-black mx-auto h-fullx w-full">
             {title}
           </span>
         </div>

@@ -20,11 +20,11 @@ export default function IndexPage(props) {
   }, []);
 
   return (
-    <div className="w-full overflow-hidden flex flex-col relative min-h-screen ">
+    <div className="w-full overflow-hidden flex flex-col relative min-h-screen bg-black text-white">
       <MainLayout>
         <div className="flex flex-col items-center">
           <div className="pt-6 mb-4">
-            <h1 className="font-bold text-4xl underline"> PLAYLIST APP </h1>{" "}
+            <h1 className="font-bold text-4xl "> PLAYLIST APP </h1>{" "}
           </div>{" "}
           <PlayLists entryItems={entryItems ? entryItems : chartEntries} />{" "}
         </div>{" "}

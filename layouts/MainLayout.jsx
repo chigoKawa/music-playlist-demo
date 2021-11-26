@@ -4,21 +4,21 @@ import { HomeIcon, MusicNoteIcon } from "@heroicons/react/solid";
 // import Link from "next/link";
 const MainLayout = (props) => {
   return (
-    <div className="w-full overflow-hidden flex flex-col relative min-h-screen">
-      <div className="fixed w-full bg-red-500 flex flex-row">
+    <div className="w-full overflow-hidden flex flex-col relative min-h-screen ">
+      <div className="fixed w-full flex flex-row bg-black border-blau text-white  border-b-2 ">
         <div className=" w-2/12  p-4 ">
           <a className="cursor-pointer" href="/">
-            <HomeIcon className="h-5 w-5 " />
+            <HomeIcon className="h-5 w-5 text-blau" />
           </a>
         </div>
         <div className=" w-fullx text-center p-4 ">
           <a className="cursor-pointer" href="/">
-            <MusicNoteIcon className="h-5 w-5 text-blue-500" />
+            <MusicNoteIcon className="h-5 w-5 text-gelb" />
           </a>
         </div>
         <div className=" w-fullx text-center p-4 ">
           <a className="cursor-pointer" href="/">
-            <MusicNoteIcon className="h-5 w-5 text-blue-100" />
+            <MusicNoteIcon className="h-5 w-5 text-rot" />
           </a>
         </div>
       </div>

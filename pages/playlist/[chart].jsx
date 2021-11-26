@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { getChartEntries } from "../../lib/tool";
 import _ from "lodash";
 import MainLayout from "../../layouts/MainLayout";
@@ -28,95 +29,125 @@ const TrackList = (props) => {
   return (
     <>
       <MainLayout>
+        <div className="w-full h-full px-4 md:p-40  bg-black text-white py-6 min-h-screen">
+          <div className="flex flex-col">
+            <div className="relative w-full flex flex-col ">
+              <div className="w-full h-full flex flex-col lg:h-80 overflow-hidden bg-gelb p-2x">
+                <img
+                  style={{ filter: "brightness(50%)" }}
+                  width="100%"
+                  src={image}
+                />
+                {/* {`https:${image}`} */}
+                {/* <Image
+                  style={{ filter: "brightness(50%)" }}
+                  className="bg-cover"
+                  src={`https:${image}`}
+                  alt={title}
+                  layout="fill"
+                  objectFit="cover"
+                  width={1500}
+                  height={500}
+                  // blurDataURL="data:..." automatically provided
+                  // placeholder="blur" // Optional blur-up while loading
+                /> */}
+              </div>
+
+              <div className=" absolute   left-1/2 top-1/2 flex flex-col p-2x">
+                <h2 className="font-bold text-2xl">{title}</h2>
+                {tracks ? (
+                  <div className="bg-blau rounded shadow-lg p-2 text-center mt-2x">
+                    {`${tracks.length ? tracks.length : 0} Songs`}
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
+            <div className="">
+              {Array.isArray(tracks)
+                ? tracks.map((track, trx) => {
+                    const trakNumber = trx + 1;
+                    const songTitle = _.get(track, "fields.title");
+                    const artistID = _.get(track, "fields.artist.sys.id");
+                    //   track.artistName = "LAGOS";
+
+                    const inCludeEntry = _.get(includes, "Entry");
+                    const artist = _.filter(inCludeEntry, (entry) => {
+                      let entryID = _.get(entry, "sys.id");
+                      if (entryID === artistID) {
+                        return entry;
+                      }
+                    });
+
+                    const artistName = _.get(artist, "[0].fields.name");
+                    const artistImage = _.get(
+                      artist,
+                      "[0].fields.image[0].fields.asset.fields.file.url"
+                    );
+
+                    return (
+                      <div className="w-full  mb-4 bg-neuter mt-4" key={trx}>
+                        {/* {JSON.stringify(artistImage)}| */}
+                        <Disclosure>
+                          {({ open }) => (
+                            <>
+                              <Disclosure.Button className="flex flex-row w-full items-center justify-between  px-4 py-4 text-sm font-medium text-left text-purple-900 bg-blue-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+                                <div
+                                  className={`${
+                                    trakNumber === 1
+                                      ? "text-red-500 font-bold text-2xl animate-bounce"
+                                      : ""
+                                  }`}
+                                >
+                                  {trakNumber}
+                                </div>
+                                <div className="w-2/12 hidden md:block text-center rounded-xl h-full p-2 whitespace-nowrap overflow-hidden truncate mr-2">
+                                  {" "}
+                                  <img
+                                    className="w-14x w-16 h-16"
+                                    src={`https:${artistImage}`}
+                                  />
+                                </div>
+                                <div className="w-3/12 text-center rounded-xl bg-blue-200 shadow-xl p-2 whitespace-nowrap overflow-hidden truncate mr-2">
+                                  {" "}
+                                  {songTitle}
+                                </div>
+                                <div className="w-3/12 text-center rounded-xl bg-blue-200 shadow-xl p-2 whitespace-nowrap overflow-hidden truncate mr-2">
+                                  {" "}
+                                  {artistName}
+                                </div>
+
+                                <ChevronUpIcon
+                                  className={`${
+                                    open ? "transform rotate-180" : ""
+                                  } w-5 h-5 text-purple-500`}
+                                />
+                              </Disclosure.Button>
+                              <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500 overflow-scroll">
+                                <SongComponent
+                                  trackMedia={trackMedia}
+                                  artistName={artistName}
+                                  artistImage={artistImage}
+                                  //   key={index}
+                                  track={track}
+                                  //   client={props.client}
+                                />
+                              </Disclosure.Panel>
+                            </>
+                          )}
+                        </Disclosure>
+                      </div>
+                    );
+                  })
+                : ""}
+            </div>
+          </div>
+        </div>
         <div
           style={{ backgroundImage: `url(${image})` }}
           className="w-full px-4 pt-16x md:p-40 bg-red-500 bg-fixed py-6 h-full min-h-screen "
-        >
-          {/* <img src={`https:${image}`} alt={imageDescription} /> */}
-
-          <div className="w-full h-full p-2 mx-auto bg-white opacity-95x  rounded-2xl">
-            {/* {JSON.stringify(includes)} */}
-            <div className="bg-whitex py-4 opacity-100">
-              <h1 className="text-center font-bold text-2xl ">{title}</h1>
-            </div>
-            {Array.isArray(tracks)
-              ? tracks.map((track, trx) => {
-                  const trakNumber = trx + 1;
-                  const songTitle = _.get(track, "fields.title");
-                  const artistID = _.get(track, "fields.artist.sys.id");
-                  //   track.artistName = "LAGOS";
-
-                  const inCludeEntry = _.get(includes, "Entry");
-                  const artist = _.filter(inCludeEntry, (entry) => {
-                    let entryID = _.get(entry, "sys.id");
-                    if (entryID === artistID) {
-                      return entry;
-                    }
-                  });
-
-                  const artistName = _.get(artist, "[0].fields.name");
-                  const artistImage = _.get(
-                    artist,
-                    "[0].fields.image[0].fields.asset.fields.file.url"
-                  );
-
-                  return (
-                    <div className="w-full  mb-4 " key={trx}>
-                      {/* {JSON.stringify(artistImage)}| */}
-                      <Disclosure>
-                        {({ open }) => (
-                          <>
-                            <Disclosure.Button className="flex flex-row w-full items-center justify-between  px-4 py-4 text-sm font-medium text-left text-purple-900 bg-blue-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-                              <div
-                                className={`${
-                                  trakNumber === 1
-                                    ? "text-red-500 font-bold text-2xl animate-bounce"
-                                    : ""
-                                }`}
-                              >
-                                {trakNumber}
-                              </div>
-                              <div className="w-2/12 hidden md:block text-center rounded-xl h-full p-2 whitespace-nowrap overflow-hidden truncate mr-2">
-                                {" "}
-                                <img
-                                  className="w-14x w-16 h-16"
-                                  src={`https:${artistImage}`}
-                                />
-                              </div>
-                              <div className="w-3/12 text-center rounded-xl bg-blue-200 shadow-xl p-2 whitespace-nowrap overflow-hidden truncate mr-2">
-                                {" "}
-                                {songTitle}
-                              </div>
-                              <div className="w-3/12 text-center rounded-xl bg-blue-200 shadow-xl p-2 whitespace-nowrap overflow-hidden truncate mr-2">
-                                {" "}
-                                {artistName}
-                              </div>
-
-                              <ChevronUpIcon
-                                className={`${
-                                  open ? "transform rotate-180" : ""
-                                } w-5 h-5 text-purple-500`}
-                              />
-                            </Disclosure.Button>
-                            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500 overflow-scroll">
-                              <SongComponent
-                                trackMedia={trackMedia}
-                                artistName={artistName}
-                                artistImage={artistImage}
-                                //   key={index}
-                                track={track}
-                                //   client={props.client}
-                              />
-                            </Disclosure.Panel>
-                          </>
-                        )}
-                      </Disclosure>
-                    </div>
-                  );
-                })
-              : ""}
-          </div>
-        </div>
+        ></div>
       </MainLayout>
       {/* tracks: {JSON.stringify(tracks)} */}
 
