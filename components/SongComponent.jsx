@@ -40,7 +40,7 @@ const SongComponent = (props) => {
   return (
     <>
       {/* youtubeVideoId : {JSON.stringify(youtubeVideoId)} : {youtubeVideoTitle} */}
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center transition duration-500 ease-in-out">
         <div className="mt-4 mb-4 ">
           <h3 className="text-center text-2xl">
             {title} by <b>{artistName}</b>

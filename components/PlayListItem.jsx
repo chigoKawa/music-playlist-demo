@@ -27,7 +27,7 @@ const PlayListItem = (props) => {
           }}
           className="transition duration-500 ease-in-out h-full max-h-80 w-full bg-blue-100 bg-auto hover:bg-contain bg-center flex  hover:bg-blue-50 rounded shadow-md py-6 items-center text-center transform hover:-translate-y-1 hover:scale-110"
         >
-          <span className="p-2 bg-whitex border-t-4 text-blau border-b-4 border-black mx-auto h-fullx w-full">
+          <span className="transition duration-500 ease-in-out p-2 border-t-4 text-blau hover:text-white hover:bg-blau  border-b-4 border-black mx-auto h-fullx w-full">
             {title}
           </span>
         </div>
