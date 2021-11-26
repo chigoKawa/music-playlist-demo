@@ -24,7 +24,13 @@ export default function IndexPage(props) {
       <MainLayout>
         <div className="flex flex-col items-center">
           <div className="pt-6 mb-4">
-            <h1 className="font-bold text-4xl "> PLAYLIST APP </h1>{" "}
+            <h1 className="font-bold text-4xl ">
+              {" "}
+              PLAYLIST{" "}
+              <span className="bg-blau px-2 rounded-t-lg shadow-lg">
+                APP
+              </span>{" "}
+            </h1>{" "}
           </div>{" "}
           <PlayLists entryItems={entryItems ? entryItems : chartEntries} />{" "}
         </div>{" "}
