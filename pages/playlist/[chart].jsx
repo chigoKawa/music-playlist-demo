@@ -99,16 +99,16 @@ const TrackList = (props) => {
                                 <div
                                   className={`${
                                     trakNumber === 1
-                                      ? "text-red-500 font-bold text-2xl animate-bounce"
+                                      ? "text-rot font-bold text-2xl animate-bounce"
                                       : ""
                                   }`}
                                 >
                                   {trakNumber}
                                 </div>
-                                <div className="w-2/12 hidden md:block text-center rounded-xl h-full p-2 whitespace-nowrap overflow-hidden truncate mr-2">
+                                <div className=" w-2/12 hidden md:block text-center rounded-xl h-full p-2 whitespace-nowrap overflow-hidden truncate mr-2">
                                   {" "}
                                   <img
-                                    className="w-14x w-16 h-16"
+                                    className="w-14x w-16 h-16 rounded-full border-4 border-blau transition ease-in hover:border-blau3"
                                     src={`https:${artistImage}`}
                                   />
                                 </div>
