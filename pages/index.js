@@ -20,10 +20,10 @@ export default function IndexPage(props) {
   }, []);
 
   return (
-    <div className="w-full overflow-hidden flex flex-col relative min-h-screen bg-black text-white">
+    <div className="w-full overflow-hidden flex flex-col relative min-h-screen bg-black text-white ">
       <MainLayout>
-        <div className="flex flex-col items-center">
-          <div className="pt-6 mb-4">
+        <div className="flex flex-col justify-items-center items-center w-full bg-blau md:px-40 ">
+          <div className="pt-6 mb-4 ">
             <h1 className="font-bold text-4xl ">
               {" "}
               PLAYLIST{" "}
@@ -32,7 +32,10 @@ export default function IndexPage(props) {
               </span>{" "}
             </h1>{" "}
           </div>{" "}
-          <PlayLists entryItems={entryItems ? entryItems : chartEntries} />{" "}
+          <div className="w-full">
+            {" "}
+            <PlayLists entryItems={entryItems ? entryItems : chartEntries} />
+          </div>
         </div>{" "}
         <div className="flex flex-col"> </div>{" "}
       </MainLayout>{" "}

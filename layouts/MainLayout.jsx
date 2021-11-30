@@ -23,8 +23,9 @@ const MainLayout = (props) => {
         </div>
       </div>
       <main className="">
-        <div className="flex flex-col overflow-hidden">
-          <section>{props.children}</section>
+        <div className="flex flex-col overflow-hidden  bg-black">
+          {props.children}
+          {/* <section></section> */}
         </div>
       </main>
     </div>

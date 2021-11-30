@@ -29,7 +29,7 @@ const TrackList = (props) => {
   return (
     <>
       <MainLayout>
-        <div className="w-full h-full px-4 md:p-40  bg-black text-white py-6 min-h-screen">
+        <div className="w-full h-full px-4 md:px-40  bg-black text-white py-6 min-h-screen">
           <div className="flex flex-col">
             <div className="relative w-full flex flex-col ">
               <div className="w-full h-full flex flex-col lg:h-80 overflow-hidden bg-gelb p-2x">
@@ -54,9 +54,9 @@ const TrackList = (props) => {
               </div>
 
               <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col p-2x">
-                <h2 className="font-bold text-2xl">{title}</h2>
+                <h2 className="font-bold text-xl lg:text-3xl">{title}</h2>
                 {tracks ? (
-                  <div className="bg-blau rounded shadow-lg p-2 text-center mt-2x">
+                  <div className="bg-blau rounded shadow-lg p-2 text-center mt-2">
                     {`${tracks.length ? tracks.length : 0} Songs`}
                   </div>
                 ) : (
