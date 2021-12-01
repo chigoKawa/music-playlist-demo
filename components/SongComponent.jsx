@@ -1,4 +1,7 @@
 import _ from "lodash";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+
+import renderOptions from "../lib/Helpers/renderOptions";
 
 // import { getEntry } from "../lib/tool";
 const SongComponent = (props) => {
@@ -15,8 +18,10 @@ const SongComponent = (props) => {
   const track = _.get(props, "track");
   const artistImage = _.get(props, "artistImage");
   const artistName = _.get(props, "artistName");
+  const bio = _.get(props, "track.fields.artist.fields.biography");
 
   const title = _.get(track, "fields.title");
+
   const mediaUrl = _.get(track, "fields.mediaUrl");
   const youtubeVideoId = _.get(
     track,
@@ -71,10 +76,26 @@ const SongComponent = (props) => {
         </div>
         <hr />
         <br />
-        <div className="mb-4 rounded-md shadow-lg overflow-hidden">
-          <img src={`https:${artistImage}`} alt={artistName} />
+        <div className="mb-4 rounded-mdx shadow-lgx overflow-hidden border-t-2 w-full p-20">
+          <div className="mb-8 text-centerx font-bold text-2xl">
+            {artistName}
+          </div>
+          <div className="flex flex-row space-x-10 ">
+            <div className="w-4/12">
+              {" "}
+              <img
+                className="w-48 h-40"
+                src={`https:${artistImage}`}
+                alt={artistName}
+              />
+            </div>
+            <div className="w-4/12">
+              {/* bio {JSON.stringify(bio)}{" "} */}
+              {bio ? documentToReactComponents(bio, renderOptions) : ""}
+            </div>
+          </div>
         </div>
-        <div className="">bio</div>
+        {/* <div className="">bio</div> */}
       </div>
     </>
   );
