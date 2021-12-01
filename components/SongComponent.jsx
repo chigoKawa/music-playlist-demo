@@ -78,7 +78,9 @@ const SongComponent = (props) => {
         <br />
         {bio ? (
           <div className="mb-4  overflow-hidden border-t-2 w-full p-20">
-            <div className="mb-8 font-bold lg:text-2xl">{artistName}</div>
+            <div className="mb-8 font-bold lg:text-2xl text-white">
+              {artistName}
+            </div>
 
             <div className="flex flex-col space-y-4 lg:space-y-0  lg:flex-row lg:space-x-10 ">
               <div className="w-full lg:w-4/12">
