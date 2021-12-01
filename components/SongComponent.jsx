@@ -76,25 +76,29 @@ const SongComponent = (props) => {
         </div>
         <hr />
         <br />
-        <div className="mb-4 rounded-mdx shadow-lgx overflow-hidden border-t-2 w-full p-20">
-          <div className="mb-8 text-centerx font-bold text-2xl">
-            {artistName}
-          </div>
-          <div className="flex flex-row space-x-10 ">
-            <div className="w-4/12">
-              {" "}
-              <img
-                className="w-48 h-40"
-                src={`https:${artistImage}`}
-                alt={artistName}
-              />
+        {bio ? (
+          <div className="mb-4  overflow-hidden border-t-2 w-full p-20">
+            <div className="mb-8 font-bold lg:text-2xl">{artistName}</div>
+
+            <div className="flex flex-col space-y-4 lg:space-y-0  lg:flex-row lg:space-x-10 ">
+              <div className="w-full lg:w-4/12">
+                {" "}
+                <img
+                  className="w-full lg:w-48 h-40"
+                  src={`https:${artistImage}`}
+                  alt={artistName}
+                />
+              </div>
+              <div className="w-full lg:w-8/12">
+                {/* bio {JSON.stringify(bio)}{" "} */}
+                {bio ? documentToReactComponents(bio, renderOptions) : ""}
+              </div>
             </div>
-            <div className="w-4/12">
-              {/* bio {JSON.stringify(bio)}{" "} */}
-              {bio ? documentToReactComponents(bio, renderOptions) : ""}
-            </div>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
+
         {/* <div className="">bio</div> */}
       </div>
     </>
