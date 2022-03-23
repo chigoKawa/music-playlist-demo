@@ -1,11 +1,10 @@
-import React from "react";
-import Image from "next/image";
-import { getChartEntries } from "../../lib/tool";
-import _ from "lodash";
-import MainLayout from "../../layouts/MainLayout";
 import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
+import _ from "lodash";
+import React from "react";
 import SongComponent from "../../components/SongComponent";
+import MainLayout from "../../layouts/MainLayout";
+import { getChartEntries } from "../../lib/tool";
 
 const TrackList = (props) => {
   const chartSlug = _.get(props, "params.chart");
@@ -79,6 +78,10 @@ const TrackList = (props) => {
                         return entry;
                       }
                     });
+
+                    if (!songTitle) {
+                      return "";
+                    }
 
                     const artistName = _.get(artist, "[0].fields.name");
                     const artistImage = _.get(

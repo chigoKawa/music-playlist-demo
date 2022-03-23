@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { getChartEntries } from "../lib/tool";
-import MainLayout from "../layouts/MainLayout";
-import PlayLists from "../components/PlayLists";
 import _ from "lodash";
+import { useEffect, useState } from "react";
+import PlayLists from "../components/PlayLists";
+import MainLayout from "../layouts/MainLayout";
+import { getChartEntries } from "../lib/tool";
 
 export default function IndexPage(props) {
   const entryItems = _.get(props, "entryItems");
@@ -45,13 +45,21 @@ export default function IndexPage(props) {
 
 export async function getServerSideProps() {
   // Fetch all available playlists
-  let entryItems = await getChartEntries("playlist").then((entries) => {
-    return entries.items;
-  });
+  let entryItems = {};
+  try {
+    entryItems = await getChartEntries("playlist").then((entries) => {
+      try {
+        return entries.items;
+      } catch (error) {
+        return {};
+      }
+    });
+  } catch (error) {}
+
   return {
     props: {
       // params: params,
-      entryItems: entryItems,
+      entryItems: entryItems ? entryItems : {},
       morePosts: {},
     },
   };
