@@ -1,7 +1,8 @@
-import _ from "lodash";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-
-import renderOptions from "../lib/Helpers/renderOptions";
+import _ from "lodash";
+import Link from "next/link";
+import slugify from "slugify";
+import richtextRenderOptions from "../lib/richtextRenderOptions";
 
 // import { getEntry } from "../lib/tool";
 const SongComponent = (props) => {
@@ -18,6 +19,7 @@ const SongComponent = (props) => {
   const track = _.get(props, "track");
   const artistImage = _.get(props, "artistImage");
   const artistName = _.get(props, "artistName");
+  const artistPageSlug = slugify(artistName.toLowerCase()); // this should be changed , use artist page as include
   const bio = _.get(props, "track.fields.artist.fields.biography");
 
   const title = _.get(track, "fields.title");
@@ -45,7 +47,10 @@ const SongComponent = (props) => {
   return (
     <>
       {/* youtubeVideoId : {JSON.stringify(youtubeVideoId)} : {youtubeVideoTitle} */}
-      <div className="flex flex-col items-center transition duration-500 ease-in-out">
+      <div
+        className="relative w-full  flex flex-col 
+      items-center transition duration-500 ease-in-out "
+      >
         <div className="mt-4 mb-4 ">
           <h3 className="text-center text-2xl">
             {title} by <b>{artistName}</b>
@@ -79,21 +84,27 @@ const SongComponent = (props) => {
         {bio ? (
           <div className="mb-4  overflow-hidden border-t-2 w-full p-20">
             <div className="mb-8 font-bold lg:text-2xl text-white">
-              {artistName}
+              <Link href={`/artist/${artistPageSlug}`}>
+                <a target="_blank"> {artistName}</a>
+              </Link>
             </div>
 
             <div className="flex flex-col space-y-4 lg:space-y-0  lg:flex-row lg:space-x-10 ">
               <div className="w-full lg:w-4/12">
-                {" "}
                 <img
                   className="w-full lg:w-48 h-40"
                   src={`https:${artistImage}`}
                   alt={artistName}
                 />
               </div>
-              <div className="w-full lg:w-8/12">
+              <div className="w-full relative lg:w-8/12  max-w-lg text-center">
                 {/* bio {JSON.stringify(bio)}{" "} */}
-                {bio ? documentToReactComponents(bio, renderOptions) : ""}
+                <div className="relative  ">
+                  {" "}
+                  {bio
+                    ? documentToReactComponents(bio, richtextRenderOptions)
+                    : ""}
+                </div>
               </div>
             </div>
           </div>

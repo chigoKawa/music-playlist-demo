@@ -1,4 +1,5 @@
 const colors = require("tailwindcss/colors");
+const plugin = require("tailwindcss/plugin");
 module.exports = {
     mode: "jit",
     purge: [
@@ -32,5 +33,17 @@ module.exports = {
     variants: {
         extend: {},
     },
-    plugins: [],
+    // plugins: [],
+    plugins: [
+        // require("@tailwindcss/typography"),
+        plugin(function({ addBase, theme }) {
+            addBase({
+                h1: { fontSize: theme("fontSize.2xl") },
+                h2: { fontSize: theme("fontSize.xl") },
+                h3: { fontSize: theme("fontSize.lg") },
+                ul: { listStyle: "disc", padding: theme("padding.8") },
+                ol: { listStyle: "decimal", padding: theme("padding.8") },
+            });
+        }),
+    ],
 };

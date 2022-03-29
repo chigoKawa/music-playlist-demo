@@ -1,0 +1,21 @@
+#run migration script
+contentful space migration --environment-id 'dev' migrations/dev/......
+
+#create new environment
+contentful space environment create -e del -n del
+
+#add new script that includes new artist page
+
+# run migration script for artist page
+contentful space migration --environment-id 'del' migrations/add-artist-page.js
+
+# update artist add featured image
+contentful space migration --environment-id 'del' migrations/update-artist-add-featured-image.js
+
+# create artist page entries 
+contentful space migration --environment-id 'del' migrations/create-artist-page-entries.js
+
+# run migration script for image gallery
+contentful space migration --environment-id 'del' migrations/add-image-gallery-type.js
+
+# try to create an artist page for all existing artists

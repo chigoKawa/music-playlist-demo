@@ -1,4 +1,3 @@
-import { getChartEntries } from "../../lib/tool";
 import _ from "lodash";
 import PlayLists from "../../components/PlayLists";
 import MainLayout from "../../layouts/MainLayout";
@@ -8,12 +7,11 @@ const TrackList = (props) => {
 
   return (
     <>
-      {/* <h1>{title}</h1> */}
+      {/* <h1>{title}</h1> */}{" "}
       <MainLayout>
         <PlayLists entryItems={entryItems} />
       </MainLayout>
-
-      {/* {JSON.stringify(props)} */}
+      {/* {JSON.stringify(props)} */}{" "}
     </>
   );
 };
