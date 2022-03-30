@@ -99,7 +99,7 @@ const TrackList = (props) => {
                       const artistName = _.get(artist, "[0].fields.name");
                       const artistImage = _.get(
                         artist,
-                        "[0].fields.image[0].fields.asset.fields.file.url"
+                        "[0].fields.featuredImage.fields.asset.fields.file.url"
                       );
 
                       return (

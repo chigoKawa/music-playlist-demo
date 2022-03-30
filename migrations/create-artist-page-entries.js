@@ -9,62 +9,80 @@ module.exports = async function(
         // url: `/content_types?sys.id[in]=artist`,
         url: `/entries?content_type=artist`,
     });
+    migration.transformEntriesToType({
+        sourceContentType: "artist",
+        targetContentType: "artistPage",
+        from: ["name"],
+        shouldPublish: true,
+        updateReferences: true,
+        removeOldEntries: false,
+        // identityKey: function(fields) {
+        //     const value = fields.woofs["en-US"].toString();
+        //     return MurmurHash3(value).result().toString();
+        // },
+        identityKey: async(fromFields) => {
+            const name = _.get(fromFields, "name['en-US']");
+            artistEntries.items.map((item) => {
+                const title = _.get(item, "fields.name.en-US");
+                const entryId = _.get(item, "sys.id");
 
-    try {
-        artistEntries.items.map((entry) => {
-            const title = _.get(entry, "fields.name.en-US");
-            const entryId = _.get(entry, "sys.id");
-
-            // console.log("entry!", entryId);
-            // return;
-            setTimeout(async() => {
-                if (title) {
-                    // create page entry
-                    const client = contentful.createClient({
-                        accessToken: accessToken,
-                    });
-                    try {
-                        await client
-                            .getSpace(spaceId)
-                            .then((space) => space.getEnvironment("del"))
-                            .then((environment) => {
-                                return environment
-                                    .createEntry("artistPage", {
-                                        fields: {
-                                            internalTitle: {
-                                                "en-US": title,
-                                            },
-                                            name: {
-                                                "en-US": title,
-                                            },
-                                            slug: {
-                                                "en-US": slugify(title.toLowerCase()),
-                                            },
-                                            artist: {
-                                                "en-US": {
-                                                    sys: { type: "Link", linkType: "Entry", id: entryId },
-                                                },
-                                            },
-                                            // components: {
-                                            //     "en-US": title,
-                                            // },
-                                        },
-                                    })
-                                    .then((artist) => artist.publish());
-                            })
-                            .then((entry) => console.log(entry))
-                            .catch(console.error);
-                    } catch (error) {
-                        console.log("error occured", error);
+                if (name && title) {
+                    if (title.toLowerCase() === name.toLowerCase()) {
+                        return entryId;
+                    } else {
+                        return Math.random();
                     }
-                    console.log("entry! done", title);
                 }
-            }, 2000);
-        });
-        return true;
-    } catch (error) {
-        return false;
-    }
+            });
+            return Math.random();
+            try {
+                if (name) {
+                    return slugify(name.toLowerCase());
+                }
+            } catch (error) {
+                return Math.random();
+            }
+
+            // return fromFields.name["en-US"].toLowerCase().replace(" ", "-");
+        },
+        transformEntryForLocale: function(fromFields, currentLocale) {
+            const name = _.get(fromFields, "name.en-US");
+            if (name) {
+                const slug = slugify(name.toLowerCase());
+                const internalTitle = name;
+                console.log("oyio", slug, name);
+
+                const getItem = artistEntries.items.find((item) => {
+                    const title = _.get(item, "fields.name.en-US");
+                    const entryId = _.get(item, "sys.id");
+
+                    if (name && title) {
+                        if (title.toLowerCase() === name.toLowerCase()) {
+                            return item;
+                        }
+                    }
+                });
+                const artistId = _.get(getItem, "sys.id");
+                if (artistId && name && slug) {
+                    console.log("oyio2", artistId);
+                    return {
+                        name,
+                        slug,
+                        internalTitle,
+                        artist: {
+                            sys: { type: "Link", linkType: "Entry", id: artistId },
+                        },
+                    };
+                }
+
+                return false;
+            }
+            return false;
+            // return {
+            //     woofs: `copy - ${fromFields.woofs[currentLocale]}`,
+            // };
+        },
+    });
 
     // const anyOtherTool = new AnyOtherTool({ spaceId, accessToken })
 };
