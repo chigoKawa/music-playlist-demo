@@ -52,19 +52,22 @@ const TrackList = (props) => {
                     width="100%"
                     src={image}
                   /> */}
+                  {image ? (
+                    <div className="w-full lg:h-80x h-full">
+                      <Image
+                        style={{ filter: "brightness(50%)" }}
+                        width={"100%"}
+                        height={"100%"}
+                        src={`https:${image}`}
+                        alt={entryTitle}
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
 
-                  <div
-                    style={{ filter: "brightness(50%)" }}
-                    className="w-full lg:h-80x h-full"
-                  >
-                    <Image
-                      width={"100%"}
-                      height={"100%"}
-                      src={`https:${image}`}
-                      alt={entryTitle}
-                      layout="fill"
-                    />
-                  </div>
                   {/* {`https:${image}`} */}
                   {/* <Image
                   style={{ filter: "brightness(50%)" }}
