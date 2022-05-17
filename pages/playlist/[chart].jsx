@@ -2,6 +2,7 @@ import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
 import _ from "lodash";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import React from "react";
 import SongComponent from "../../components/SongComponent";
 import MainLayout from "../../layouts/MainLayout";
@@ -46,11 +47,24 @@ const TrackList = (props) => {
             <div className="flex flex-col">
               <div className="relative w-full flex flex-col ">
                 <div className="w-full h-full flex flex-col lg:h-80 overflow-hidden bg-gelb p-2x">
-                  <img
+                  {/* <img
                     style={{ filter: "brightness(50%)" }}
                     width="100%"
                     src={image}
-                  />
+                  /> */}
+
+                  <div
+                    style={{ filter: "brightness(50%)" }}
+                    className="w-full lg:h-80x h-full"
+                  >
+                    <Image
+                      width={"100%"}
+                      height={"100%"}
+                      src={`https:${image}`}
+                      alt={entryTitle}
+                      layout="fill"
+                    />
+                  </div>
                   {/* {`https:${image}`} */}
                   {/* <Image
                   style={{ filter: "brightness(50%)" }}
