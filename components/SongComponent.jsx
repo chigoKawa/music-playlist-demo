@@ -19,7 +19,7 @@ const SongComponent = (props) => {
   const track = _.get(props, "track");
   const artistImage = _.get(props, "artistImage");
   const artistName = _.get(props, "artistName");
-  const artistPageSlug = slugify(artistName.toLowerCase()); // this should be changed , use artist page as include
+  const artistPageSlug = artistName ? slugify(artistName.toLowerCase()) : "/"; // this should be changed , use artist page as include
   const bio = _.get(props, "track.fields.artist.fields.biography");
 
   const title = _.get(track, "fields.title");

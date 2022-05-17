@@ -4,9 +4,10 @@ import dynamic from "next/dynamic";
 
 const Xray = dynamic(() => import("./Xray"), { ssr: false });
 const FeaturedVideo = (props) => {
+  console.log("youtubeVideoID", props);
   const youtubeVideoID = _.get(props, "fields.youtubeVideo");
   const youtubeVideoTitle = _.get(props, "fields.title");
-  const title = _.get(props, "title");
+  const title = _.get(props, "fields.title");
   const entryId = _.get(props, "sys.id");
   const contentType = _.get(props, "sys.contentType.sys.id");
 

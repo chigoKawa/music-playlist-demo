@@ -35,13 +35,6 @@ module.exports = async function(
                 }
             });
             return Math.random();
-            try {
-                if (name) {
-                    return slugify(name.toLowerCase());
-                }
-            } catch (error) {
-                return Math.random();
-            }
 
             // return fromFields.name["en-US"].toLowerCase().replace(" ", "-");
         },
