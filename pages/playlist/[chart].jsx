@@ -12,11 +12,13 @@ const TrackList = (props) => {
   const chartSlug = _.get(props, "params.chart");
   const entryItems = _.get(props, "entryItems.items");
   const includes = _.get(props, "entryItems.includes");
+
   let entry = _.filter(entryItems, (item) => {
     let slug = _.get(item, "fields.slug");
 
     return slug === chartSlug;
   });
+
   let title = _.get(entry, "[0].fields.title");
   let tracks = _.get(entry, "[0].fields.tracks");
   let image = _.get(entry, "[0].fields.image.fields.asset.fields.file.url");
@@ -81,6 +83,16 @@ const TrackList = (props) => {
                       const trakNumber = trx + 1;
                       const songTitle = _.get(track, "fields.title");
                       const artistID = _.get(track, "fields.artist.sys.id");
+                      const trackArtist = _.get(track, "fields.artist");
+                      const trackArtistName = _.get(
+                        track,
+                        "fields.artist.fields.internalTitle"
+                      );
+                      const trackArtistNameImage = _.get(
+                        track,
+                        "fields.artist.fields.featuredImage.fields.asset.fields.file.url"
+                      );
+                      console.log("song entry!!", trackArtistName, trackArtist);
                       //   track.artistName = "LAGOS";
                       console.log("za track", track);
 
@@ -130,7 +142,11 @@ const TrackList = (props) => {
                                     {" "}
                                     <img
                                       className="w-14x w-16 h-16 rounded-full border-4 border-blau transition ease-in hover:border-blau3"
-                                      src={`https:${artistImage}`}
+                                      src={`https:${
+                                        artistImage
+                                          ? artistImage
+                                          : trackArtistNameImage
+                                      }`}
                                     />
                                   </div>
                                   <div className="w-3/12 text-center rounded-xl bg-blue-200 shadow-xl p-2 whitespace-nowrap overflow-hidden truncate mr-2">
@@ -139,7 +155,7 @@ const TrackList = (props) => {
                                   </div>
                                   <div className="w-3/12 text-center rounded-xl bg-blue-200 shadow-xl p-2 whitespace-nowrap overflow-hidden truncate mr-2">
                                     {" "}
-                                    {artistName}
+                                    {artistName ? artistName : trackArtistName}
                                   </div>
 
                                   <ChevronUpIcon
@@ -160,8 +176,16 @@ const TrackList = (props) => {
                                   <Disclosure.Panel className="  px-4 pt-4 pb-2 text-sm text-gray-500 ">
                                     <SongComponent
                                       trackMedia={trackMedia}
-                                      artistName={artistName}
-                                      artistImage={artistImage}
+                                      artistName={
+                                        artistName
+                                          ? artistName
+                                          : trackArtistName
+                                      }
+                                      artistImage={
+                                        artistImage
+                                          ? artistImage
+                                          : trackArtistNameImage
+                                      }
                                       //   key={index}
                                       track={track}
                                       //   client={props.client}
