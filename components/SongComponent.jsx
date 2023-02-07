@@ -84,8 +84,8 @@ const SongComponent = (props) => {
         {bio ? (
           <div className="mb-4  overflow-hidden border-t-2 w-full p-20">
             <div className="mb-8 font-bold lg:text-2xl text-white">
-              <Link href={`/artist/${artistPageSlug}`}>
-                <a target="_blank"> {artistName}</a>
+              <Link target="_blank" href={`/artist/${artistPageSlug}`}>
+                {artistName}
               </Link>
             </div>
 

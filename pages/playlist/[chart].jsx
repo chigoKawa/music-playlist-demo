@@ -6,81 +6,68 @@ import Image from "next/image";
 import React from "react";
 import SongComponent from "../../components/SongComponent";
 import MainLayout from "../../layouts/MainLayout";
-import { getChartEntries } from "../../lib/tool";
+import { getEntriesByContentType } from "../../lib/tool";
+import Head from "next/head";
 
 const Xray = dynamic(() => import("../../components/Xray"), { ssr: false });
 const TrackList = (props) => {
-  const chartSlug = _.get(props, "params.chart");
-  const entryItems = _.get(props, "entryItems.items");
   const includes = _.get(props, "entryItems.includes");
+  const entry = _.get(props, "entry");
 
-  let entry = _.filter(entryItems, (item) => {
-    let slug = _.get(item, "fields.slug");
+  let title = _.get(entry, "fields.title");
+  let tracks = _.get(entry, "fields.tracks");
+  let image = _.get(entry, "fields.image.fields.asset.fields.file.url");
 
-    return slug === chartSlug;
-  });
-
-  let title = _.get(entry, "[0].fields.title");
-  let tracks = _.get(entry, "[0].fields.tracks");
-  let image = _.get(entry, "[0].fields.image.fields.asset.fields.file.url");
-
-  let playlist = _.get(entry, "[0]");
+  let playlist = entry;
   const contentType = _.get(playlist, "sys.contentType.sys.id");
   const entryId = _.get(playlist, "sys.id");
   const entryTitle = _.get(playlist, "fields.title");
-
-  if (!entryItems) {
-    // return "No Entries"
-  }
 
   let trackMedia = "";
 
   return (
     <>
+      <Head>
+        <title>{`${title.toUpperCase()} | ${tracks.length} Song(s)`}</title>
+      </Head>
       <MainLayout>
         <Xray
           contentType={contentType}
           entryId={entryId}
           entryTitle={entryTitle}
         >
-          <div className="w-full h-full px-4 md:px-40  bg-black text-white py-6 min-h-screen">
+          {/* <p className="text-white">{JSON.stringify(entry)}</p> */}
+
+          <div className="w-full h-full px-4 md:px-40  bg-black text-white py-6 min-h-screen max-w-7xl m-auto">
             <div className="flex flex-col">
               <div className="relative w-full flex flex-col ">
-                <div className="w-full h-full flex flex-col lg:h-80 overflow-hidden bg-gelb p-2x">
+                <div className="w-full h-full flex flex-col lg:h-80 overflow-hidden bg-gelb p-2x ">
                   {/* <img
                     style={{ filter: "brightness(50%)" }}
                     width="100%"
                     src={image}
                   /> */}
+
                   {image ? (
                     <div className="w-full lg:h-80x h-full">
                       <Image
-                        style={{ filter: "brightness(50%)" }}
-                        width={"100%"}
-                        height={"100%"}
+                        // style={{ filter: "brightness(50%)" }}
+                        // width={"100%"}
+                        // height={"100%"}
                         src={`https:${image}`}
                         alt={entryTitle}
-                        layout="fill"
-                        objectFit="cover"
+                        // layout="fill"
+                        // objectFit="cover"
+                        fill
+                        style={{
+                          objectFit: "cover",
+                          filter: "brightness(50%)",
+                        }}
                       />
                     </div>
                   ) : (
                     ""
                   )}
-
-                  {/* {`https:${image}`} */}
-                  {/* <Image
-                  style={{ filter: "brightness(50%)" }}
-                  className="bg-cover"
-                  src={`https:${image}`}
-                  alt={title}
-                  layout="fill"
-                  objectFit="cover"
-                  width={1500}
-                  height={500}
-                  // blurDataURL="data:..." automatically provided
-                  // placeholder="blur" // Optional blur-up while loading
-                /> */}
                 </div>
 
                 <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col p-2x">
@@ -100,7 +87,7 @@ const TrackList = (props) => {
                       const trakNumber = trx + 1;
                       const songTitle = _.get(track, "fields.title");
                       const artistID = _.get(track, "fields.artist.sys.id");
-                      const trackArtist = _.get(track, "fields.artist");
+                      // const trackArtist = _.get(track, "fields.artist");
                       const trackArtistName = _.get(
                         track,
                         "fields.artist.fields.internalTitle"
@@ -109,9 +96,8 @@ const TrackList = (props) => {
                         track,
                         "fields.artist.fields.featuredImage.fields.asset.fields.file.url"
                       );
-                      console.log("song entry!!", trackArtistName, trackArtist);
+
                       //   track.artistName = "LAGOS";
-                      console.log("za track", track);
 
                       const inCludeEntry = _.get(includes, "Entry");
                       const artist = _.filter(inCludeEntry, (entry) => {
@@ -158,6 +144,7 @@ const TrackList = (props) => {
                                   <div className=" w-2/12 hidden md:block text-center rounded-xl h-full p-2 whitespace-nowrap overflow-hidden truncate mr-2">
                                     {" "}
                                     <img
+                                      alt=""
                                       className="w-14x w-16 h-16 rounded-full border-4 border-blau transition ease-in hover:border-blau3"
                                       src={`https:${
                                         artistImage
@@ -238,16 +225,20 @@ export default TrackList;
 
 export async function getServerSideProps({ params }) {
   // Fetch necessary data for
-  let entryItems = await getChartEntries("playlist").then((entries) => {
-    console.log("second enti", entries.items[0].fields.tracks);
-    return entries;
-  });
+
+  const slug = params?.chart;
+  const entry = await getEntriesByContentType("playlist", slug);
+
+  // let entries = await getChartEntries("playlist");
+  // let entryItems = await getChartEntries("playlist").then((entries) => {
+  //   return entries;
+  // });
   return {
     props: {
       params: params,
 
-      entryItems: entryItems,
-      morePosts: {},
+      // entryItems: entries,
+      entry: entry?.items?.[0] || {},
     },
   };
 }

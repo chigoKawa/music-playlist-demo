@@ -31,16 +31,16 @@ const TrackList = (props) => {
   let trackMedia = "";
 
   return (
-    <div className="bg-red-300x min-w-full">
+    <div className="bg-red-300x min-w-fullx ">
       <MainLayout>
         <Xray
           contentType={contentType}
           entryId={entryId}
           entryTitle={entryTitle}
         >
-          <div className=" h-full text-white py-10 overflow-hidden  ">
+          <div className=" h-full text-white py-10 overflow-hidden  max-w-7xl m-auto ">
             {/* Artist details */}
-            <div className="relative">
+            <div className="relative ">
               <BlockRenderer section={artistDetails} />
             </div>
             {/* other components */}
@@ -60,7 +60,6 @@ const TrackList = (props) => {
           </div>
         </Xray>
       </MainLayout>
-
       {/* {JSON.stringify(entry)} */}
     </div>
   );

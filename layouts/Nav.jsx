@@ -17,15 +17,10 @@ const Nav = (props) => {
         <div className="flex flex-row"></div>
         <div className="md:w-3/4 flex flex-row space-x-2">
           <Link href="/">
-            <a>
-              {" "}
-              <HomeIcon className="h-5 w-5 text-blau" />
-            </a>
+            <HomeIcon className="h-5 w-5 text-blau" />
           </Link>
           <Link href="/">
-            <a>
-              <MusicNoteIcon className="h-5 w-5 text-gelb" />
-            </a>
+            <MusicNoteIcon className="h-5 w-5 text-gelb" />
           </Link>
         </div>
 
@@ -40,7 +35,7 @@ const Nav = (props) => {
                 <div className="relative flex flex-row  space-x-2">
                   <div className="relative">
                     <input
-                      vale={xrayMode}
+                      value={xrayMode}
                       onChange={onToggleChange}
                       id="toggleOne"
                       type="checkbox"
