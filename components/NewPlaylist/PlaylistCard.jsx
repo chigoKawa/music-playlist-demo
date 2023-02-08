@@ -23,7 +23,7 @@ const PlaylistCard = ({ item }) => {
         >
           <div
             style={{
-              backgroundImage: `url(${image})`,
+              backgroundImage: `url(${image}?w=600&fit=fill&q=80)`,
               backgroundColor: `rgba(255, 255, 255, 0.486)`,
               backgroundBlendMode: "overlay",
               //   height: "200px",

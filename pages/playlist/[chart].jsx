@@ -9,6 +9,9 @@ import MainLayout from "../../layouts/MainLayout";
 import { getEntriesByContentType } from "../../lib/tool";
 import Head from "next/head";
 
+const FALLBACK_IMAGE =
+  "https://images.ctfassets.net/wziypkqxv6cw/2hOInB7h4xxKYjomsw7z6J/a6cc40f2f478785f35f86e5bdfe40781/treble_cleff.jpg";
+
 const Xray = dynamic(() => import("../../components/Xray"), { ssr: false });
 const TrackList = (props) => {
   const includes = _.get(props, "entryItems.includes");
@@ -36,8 +39,6 @@ const TrackList = (props) => {
           entryId={entryId}
           entryTitle={entryTitle}
         >
-          {/* <p className="text-white">{JSON.stringify(entry)}</p> */}
-
           <div className="w-full h-full px-4 md:px-40  bg-black text-white py-6 min-h-screen max-w-7xl m-auto">
             <div className="flex flex-col">
               <div className="relative w-full flex flex-col ">
@@ -51,6 +52,7 @@ const TrackList = (props) => {
                   {image ? (
                     <div className="w-full lg:h-80x h-full">
                       <Image
+                        loading="eager"
                         // style={{ filter: "brightness(50%)" }}
                         // width={"100%"}
                         // height={"100%"}
@@ -97,6 +99,8 @@ const TrackList = (props) => {
                         "fields.artist.fields.featuredImage.fields.asset.fields.file.url"
                       );
 
+                      console.log("tracky", track);
+
                       //   track.artistName = "LAGOS";
 
                       const inCludeEntry = _.get(includes, "Entry");
@@ -141,17 +145,37 @@ const TrackList = (props) => {
                                   >
                                     {trakNumber}
                                   </div>
+
                                   <div className=" w-2/12 hidden md:block text-center rounded-xl h-full p-2 whitespace-nowrap overflow-hidden truncate mr-2">
-                                    {" "}
-                                    <img
+                                    <div className="w-16 h-16 rounded-full border-4 border-blau transition ease-in hover:border-blau3 overflow-hidden">
+                                      <Image
+                                        alt=""
+                                        width={200}
+                                        height={200}
+                                        className=" "
+                                        quality={80}
+                                        src={
+                                          trackArtistNameImage
+                                            ? `https:${trackArtistNameImage}`
+                                            : FALLBACK_IMAGE
+                                        }
+                                        style={{
+                                          // objectFit: "contain",
+                                          width: "100%",
+                                          height: "auto",
+                                        }}
+                                      />
+                                    </div>
+
+                                    {/* <img
                                       alt=""
-                                      className="w-14x w-16 h-16 rounded-full border-4 border-blau transition ease-in hover:border-blau3"
+                                      className=" hidden w-16 h-16 rounded-full border-4 border-blau transition ease-in hover:border-blau3"
                                       src={`https:${
                                         artistImage
                                           ? artistImage
                                           : trackArtistNameImage
                                       }`}
-                                    />
+                                    /> */}
                                   </div>
                                   <div className="w-3/12 text-center rounded-xl bg-blue-200 shadow-xl p-2 whitespace-nowrap overflow-hidden truncate mr-2">
                                     {" "}
@@ -161,7 +185,6 @@ const TrackList = (props) => {
                                     {" "}
                                     {artistName ? artistName : trackArtistName}
                                   </div>
-
                                   <ChevronUpIcon
                                     className={`${
                                       open ? "transform rotate-180" : ""
@@ -206,17 +229,12 @@ const TrackList = (props) => {
               </div>
             </div>
           </div>
-          <div
-            style={{ backgroundImage: `url(${image})` }}
-            className="w-full px-4 pt-16x md:p-40 bg-red-500 bg-fixed py-6 h-full min-h-screen "
-          ></div>
+          {/* <div
+            style={{ backgroundImage: `url(${image}?w=500&fit=fill&q=80)` }}
+            className="hidden w-full px-4 pt-16x md:p-40 bg-red-500 bg-fixed py-6 h-full min-h-screen "
+          ></div> */}
         </Xray>
       </MainLayout>
-      {/* tracks: {JSON.stringify(tracks)} */}
-
-      <br />
-
-      {/* {JSON.stringify(entry)} */}
     </>
   );
 };
