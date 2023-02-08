@@ -48,9 +48,15 @@ const PlaylistCard = ({ item }) => {
           </span>
         </div>
 
-        <div className="absolute group-hover:bottom-24 group-hover:opacity-95 opacity-0 bottom-0 right-8 transition-all ease-in-out delay-200 ">
-          <div className="">
+        <div
+          className="absolute group-hover:bottom-24 group-hover:opacity-100 opacity-0 bottom-0 right-8 
+        transition-all ease-in-out delay-200 duration-500  "
+        >
+          {/* <div className="">
             <AiFillPlayCircle className="w-14 h-14  text-rotx text-green-500 " />
+          </div> */}
+          <div className="bg-black border-0 outline-0 w-12 h-12 rounded-full ">
+            <AiFillPlayCircle className="relative w-12 h-12 scale-125  text-green-500 top-0 bottom-0 left-0 " />
           </div>
         </div>
       </div>
