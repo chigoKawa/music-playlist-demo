@@ -12,20 +12,24 @@ const Nav = (props) => {
     // console.log("xrayMode", e.target.checked);
   };
   return (
-    <div className="flex p-4 flex-col bg-cf-link-600 bg-black  border-blau text-white  border-b-2 ">
-      <div className="flex flex-row space-x-4">
-        <div className="flex flex-row"></div>
-        <div className="md:w-3/4 flex flex-row space-x-2">
-          <Link href="/">
-            <HomeIcon className="h-5 w-5 text-blau" />
+    <div className="flex p-4 flex-col bg-cf-link-600 bg-black  border-blau text-white  border-b-2 w-full px-10">
+      <div className="flex flex-row space-x-4 justify-between max-w-7xlx m-autox w-full">
+        {/* <div className="flex flex-row"></div> */}
+        <div className="md:w-3/4c flex flex-row space-x-2">
+          <Link href="/" passHref>
+            <div className="uppercase flex flex-row space-x-2">
+              <HomeIcon className="h-5 w-5 text-blau" />
+
+              <span className=""> Playlist App</span>
+            </div>
           </Link>
-          <Link href="/">
+          {/* <Link href="/">
             <MusicNoteIcon className="h-5 w-5 text-gelb" />
-          </Link>
+          </Link> */}
         </div>
 
         <div className="flex flex-row space-x-4 items-center justify-items-center">
-          <div className="">Menu</div>
+          {/* <div className="">Menu</div> */}
           <div className="flex flex-row m-auto justify-items-center items-center bg-red-100x">
             <div className="flex h-10x  items-center w-full ">
               <label

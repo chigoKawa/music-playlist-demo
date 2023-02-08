@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <AppWrapper>
       <Head>
-        <title>Content Authoring | Music Playlists.</title>
+        <title>Content Authoring | Playlist App.</title>
         <meta
           name="description"
           content="Demo website for Hands-on activity during training"
