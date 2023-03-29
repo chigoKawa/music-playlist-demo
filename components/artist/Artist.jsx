@@ -15,6 +15,7 @@ const Artist = (props) => {
   const fields = _.get(props, "fields");
   const featuredImage = _.get(fields, "featuredImage");
   const biography = _.get(fields, "biography");
+
   return (
     <Xray contentType={contentType} entryId={entryId} entryTitle={entryTitle}>
       <InnerLayout>
@@ -24,13 +25,13 @@ const Artist = (props) => {
 
             {/* <p>{JSON.stringify(biography)}</p> */}
 
-            <div className="shadow-xl border-2 border-blau rounded-3xl overflow-hidden min-w-[300px] ">
+            <div className="shadow-xl border-2 border-blau rounded-3xl overflow-hidden md:min-w-[300px] ">
               <MediaWrapper
                 classes="h-[200px] lg:h-[300px] w-auto"
                 {...featuredImage}
               />
             </div>
-            <div className="relative text-justify w-80 md:w-full md:max-w-2xl whitespace-normal overflow-hidden">
+            <div className="relative text-justify w-80 md:w-full md:max-w-2xl whitespace-normal overflow-hidden ">
               {documentToReactComponents(biography, richtextRenderOptions)}
             </div>
           </div>

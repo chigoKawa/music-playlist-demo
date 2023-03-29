@@ -28,10 +28,10 @@ const Nav = (props) => {
           </Link> */}
         </div>
 
-        <div className="flex flex-row space-x-4 items-center justify-items-center">
+        <div className="flex flex-row space-x-4 items-center justify-items-center ">
           {/* <div className="">Menu</div> */}
-          <div className="flex flex-row m-auto justify-items-center items-center bg-red-100x">
-            <div className="flex h-10x  items-center w-full ">
+          <div className="flex flex-row m-auto justify-items-center items-center ">
+            <div className="flex   items-center w-full ">
               <label
                 htmlFor="toggleOne"
                 className="flex items-center cursor-pointer"
@@ -43,13 +43,13 @@ const Nav = (props) => {
                       onChange={onToggleChange}
                       id="toggleOne"
                       type="checkbox"
-                      className="sr-only"
+                      className="sr-only "
                     />
 
                     <div className="w-10 h-4  bg-gelb rounded-full shadow-inner"></div>
 
                     <div
-                      className={`dot absolute w-6 h-6 ${
+                      className={` absolute w-6 h-6 ${
                         xrayMode ? "translate-x-full bg-cf-green-400" : ""
                       }  bg-blau4 
                 rounded-full shadow -left-1 -top-1 transition`}

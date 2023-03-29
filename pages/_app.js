@@ -1,4 +1,5 @@
 // import 'tailwindcss/tailwind.css'
+import "keen-slider/keen-slider.min.css";
 import { AppWrapper } from "../context/state";
 import Head from "next/head";
 import "../styles/global.css";
